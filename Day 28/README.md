@@ -24,16 +24,6 @@ The tech stack remains the same, but we are now leveraging a cloud platform to h
 
 -----
 
-## 🚀 Run the App
-
-Our voice agent is now live\! You can access and interact with it here:
-
-**[https://marvis-voice-agent-l7da.onrender.com/](https://marvis-voice-agent-l7da.onrender.com/)**
-
-Simply visit the link, click the settings icon to enter your API keys, grant microphone permissions, and start chatting\!
-
------
-
 ## 📂 Project Structure
 
 The project structure is optimized for deployment.
@@ -56,9 +46,3 @@ AI Voice Agent/
 ```
 
 -----
-
-## ✅ Completed Days
-
-  * **Day 01 - 26**: Foundational work, from setting up the server and integrating AI services to giving the agent a persona and web search capabilities.
-  * **Day 27**: Revamped the UI and implemented a settings panel for API key configuration directly in the browser.
-  * **Day 28**: Successfully deployed the agent to a public cloud server, making it accessible to all.
