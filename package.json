@@ -1,0 +1,16 @@
+{
+  "name": "day-16",
+  "version": "1.0.0",
+  "description": "Day 16 - Streaming Audio via WebSockets",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node server/server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "ws": "^8.17.0"
+  }
+}
