@@ -1,0 +1,4 @@
+Flask
+Flask-Cors
+python-dotenv
+assemblyai  # added this
