@@ -1,0 +1,205 @@
+:root {
+  --bg: #0b1020;
+  --card: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+  --accent1: #8b5cf6;
+  --accent2: #06b6d4;
+  --muted: #94a3b8;
+  --glass: rgba(255, 255, 255, 0.03);
+  --glass-2: rgba(255, 255, 255, 0.02);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  color: #fff;
+}
+
+.stage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.card {
+  background: var(--card);
+  border-radius: 20px;
+  padding: 20px 28px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 50px rgba(0, 0, 0, 0.4);
+}
+
+/* Recording Mic Button */
+.mic-btn {
+  position: relative;
+  border: none;
+  background: var(--accent1);
+  color: #fff;
+  padding: 14px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  overflow: hidden;
+}
+.mic-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+}
+.mic-btn:active {
+  transform: scale(0.97);
+}
+
+.recording .mic-btn {
+  box-shadow: 0 0 0 6px rgba(139, 92, 246, 0.08),
+              0 0 0 12px rgba(6, 182, 212, 0.06);
+}
+.recording .mic-btn::before,
+.recording .mic-btn::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50px;
+  pointer-events: none;
+  animation: breathe 1.8s infinite ease-in-out;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 56, 96, 0.14), transparent 60%);
+}
+.recording .mic-btn::after {
+  animation-delay: .9s;
+}
+
+/* Ripple pulse */
+@keyframes breathe {
+  0% { transform: scale(1); opacity: .55 }
+  50% { transform: scale(1.08); opacity: .25 }
+  100% { transform: scale(1); opacity: .55 }
+}
+
+/* Status */
+.status {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 6px 18px rgba(74, 222, 128, 0.12);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+.status-text {
+  color: var(--muted);
+  font-weight: 700;
+}
+.recording #statusDot {
+  background: #ff6b6b;
+  box-shadow: 0 6px 18px rgba(255, 107, 107, 0.22);
+}
+
+/* Visual / Canvas */
+.visual {
+  margin: 14px 0;
+  padding: 10px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, var(--glass), var(--glass-2));
+  border: 1px solid rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+  animation: fadeInUp 0.6s ease;
+}
+canvas {
+  width: 100%;
+  height: 120px;
+  display: block;
+  border-radius: 8px;
+}
+
+/* Transcript */
+.transcript-box {
+  margin-top: 10px;
+  animation: fadeIn 0.8s ease;
+}
+.transcript-title {
+  color: var(--muted);
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+textarea#transcript {
+  width: 100%;
+  min-height: 100px;
+  resize: none;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(12, 16, 26, 0.6);
+  color: #dbeafe;
+  font-size: 0.98rem;
+  font-family: inherit;
+  outline: none;
+}
+
+/* Playback */
+.playback {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+audio {
+  display: none;
+}
+.meta {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.audio-url {
+  color: var(--muted);
+  font-size: 0.86rem;
+  max-width: 420px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Footer */
+.card-footer {
+  margin-top: 14px;
+  color: var(--muted);
+  text-align: right;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0 }
+  to { opacity: 1 }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px) }
+  to { opacity: 1; transform: translateY(0) }
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+  .card { padding: 16px }
+  .title h1 { font-size: 1.2rem }
+}

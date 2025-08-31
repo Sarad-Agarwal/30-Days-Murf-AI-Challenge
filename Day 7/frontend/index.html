@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Echo Bot v2 — Murf TTS Echo</title>
+  <link rel="stylesheet" href="/frontend/style.css" />
+</head>
+<body>
+  <main class="stage">
+    <div class="card">
+      <header class="card-header">
+        <div class="title">
+          <h1>Echo Bot <span class="pill">v2</span></h1>
+          <p class="subtitle">Speak, transcribe, murf-voice reply ✨</p>
+        </div>
+        <div class="logo">
+          <!-- simple SVG sonic wave -->
+          <svg width="56" height="56" viewBox="0 0 64 64" fill="none" aria-hidden>
+            <rect width="64" height="64" rx="12" fill="#0f172a"/>
+            <path d="M12 40c6-12 10-12 16 0s10 12 16 0" stroke="#8b5cf6" stroke-width="3" stroke-linecap="round"/>
+            <path d="M8 28c8-10 12-10 20 0s12 10 20 0" stroke="#06b6d4" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </header>
+
+      <section class="controls">
+        <div class="recorder">
+          <button id="recordBtn" class="btn btn-primary">
+            <span id="recIcon" class="rec-dot"></span>
+            <span id="recText">Start Recording</span>
+          </button>
+
+          <div class="upload">
+            <label class="upload-label">
+              <input id="fileInput" type="file" accept="audio/*" />
+              <span class="upload-btn">Upload audio</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="status" id="status">
+          <div class="status-dot" id="statusDot"></div>
+          <div class="status-text" id="statusText">Idle</div>
+        </div>
+      </section>
+
+      <section class="visual">
+        <canvas id="wave" width="800" height="120" aria-hidden></canvas>
+      </section>
+
+      <section class="transcript-box">
+        <div class="transcript-title">Transcription</div>
+        <textarea id="transcript" placeholder="Transcription appears here..." readonly></textarea>
+      </section>
+
+      <section class="playback">
+        <audio id="player" controls></audio>
+        <div class="meta">
+          <div id="audioUrl" class="audio-url"></div>
+          <button id="shareBtn" class="btn btn-ghost" title="Copy audio URL">Copy URL</button>
+        </div>
+      </section>
+
+      <footer class="card-footer">
+        <small>Made by ~ Sarad Agarwal</small>
+      </footer>
+    </div>
+  </main>
+
+  <script src="/frontend/app.js"></script>
+</body>
+</html>
