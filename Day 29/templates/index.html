@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MARVIS</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/static/style.css">
+
+  <style>
+    /* Background & font */
+    body.bg-light {
+      background: radial-gradient(circle at top, #0d6efd, #1a1a2e, #000);
+      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+    }
+
+    /* Floating particles */
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      animation: float 15s infinite;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(0) translateX(0);
+        opacity: 1;
+      }
+
+      to {
+        transform: translateY(-200vh) translateX(50vw);
+        opacity: 0;
+      }
+    }
+
+    /* Chat container glass effect */
+    .chat-container {
+      background: rgba(255, 255, 255, 0.05) !important;
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 2rem;
+      border: 2px solid rgba(0, 255, 255, 0.2);
+      box-shadow: 0 0 30px rgba(119, 0, 255, 0.3);
+      animation: fadeIn 1s ease forwards;
+      z-index: 2;
+      position: relative;
+    }
+
+    @keyframes fadeIn {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    h4 {
+      font-weight: 700;
+      text-shadow: 0 0 20px #0dcaf0;
+    }
+
+    /* Settings button */
+    .settings-btn {
+      position: absolute;
+      top: 30px;
+      right: 15px;
+      background: transparent;
+      border: none;
+      color: #0dcaf0;
+      font-size: 1.4rem;
+      transition: transform 0.2s ease, color 0.3s ease;
+    }
+
+    .settings-btn:hover {
+      transform: rotate(90deg);
+      color: #20c997;
+    }
+
+    /* Mic button glowing */
+    .record-btn {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff4b2b, #ff416c);
+      border: none;
+      color: white;
+      font-size: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 25px rgba(255, 65, 108, 0.8);
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 5;
+    }
+
+    .record-btn:hover {
+      transform: scale(1.15);
+      box-shadow: 0 0 50px rgba(255, 65, 108, 1);
+    }
+
+    .record-btn.recording {
+      background: linear-gradient(135deg, #dc3545, #ff073a);
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(255, 7, 58, 0.7);
+      }
+
+      70% {
+        box-shadow: 0 0 0 30px rgba(255, 7, 58, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(255, 7, 58, 0);
+      }
+    }
+
+    .status-display {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      font-weight: 500;
+      text-shadow: 0 0 20px #0dcaf0, 0 0 40px #20c997;
+    }
+  </style>
+</head>
+
+<body class="bg-light">
+
+  <!-- Floating background particles -->
+  <div id="particles"></div>
+
+  <div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="chat-container">
+      <div class="chat-header text-center mb-4">
+        <h4>🤖 AI Voice Agent (MARVIS grown JARVIS)</h4>
+        <p class="text-muted">Your Conversational AI Assistance</p>
+        <button id="settingsBtn" class="settings-btn" data-bs-toggle="modal" data-bs-target="#settingsModal">
+          <i class="fas fa-cog"></i>
+        </button>
+      </div>
+      <div id="chat-log" class="chat-log"></div>
+      <div class="chat-input-container text-center mt-4">
+        <button id="recordBtn" class="record-btn">
+          <i class="fas fa-microphone"></i>
+        </button>
+        <div id="statusDisplay" class="status-display">Ready to chat!</div>
+        <div class="text-center mt-2">
+          <a href="https://murf.ai/api/docs/introduction/overview" target="_blank"
+            style="color: #0dcaf0; text-decoration: none; font-weight: 500;">
+            Powered by Murf
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content text-white"
+          style="background: linear-gradient(135deg, #6a11cb, #2575fc); border-radius: 15px; overflow: hidden;">
+
+          <!-- Header -->
+          <div class="modal-header border-0">
+            <h5 class="modal-title fw-bold" id="settingsModalLabel"
+              style="color: #fff; text-shadow: 0 0 8px rgba(0,0,0,0.6);">
+              ⚙️ Settings
+            </h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <!-- Body -->
+          <div class="modal-body">
+            <div class="text-center mb-4">
+              <h6 class="fw-bold" style="color: #ffeb3b;">🔑 Enter Your API Keys Below</h6>
+              <p class="small" style="color: rgba(255,255,255,0.8);">These keys are required to enable MARVIS features.
+              </p>
+            </div>
+
+            <div class="mb-3">
+              <label for="murfApiKey" class="form-label">MURF API Key</label>
+              <input type="password" class="form-control bg-white text-dark" id="murfApiKey"
+                placeholder="Enter your Murf API key">
+            </div>
+            <div class="mb-3">
+              <label for="assemblyAiApiKey" class="form-label">AssemblyAI API Key</label>
+              <input type="password" class="form-control bg-white text-dark" id="assemblyAiApiKey"
+                placeholder="Enter your AssemblyAI API key">
+            </div>
+            <div class="mb-3">
+              <label for="geminiApiKey" class="form-label">Gemini API Key</label>
+              <input type="password" class="form-control bg-white text-dark" id="geminiApiKey"
+                placeholder="Enter your Gemini API key">
+            </div>
+            <div class="mb-3">
+              <label for="serpApiKey" class="form-label">SerpAPI API Key</label>
+              <input type="password" class="form-control bg-white text-dark" id="serpApiKey"
+                placeholder="Enter your SerpAPI API key">
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div class="modal-footer border-0">
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-warning fw-bold" id="saveKeysBtn">💾 Save Changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Floating particles script
+      const particlesContainer = document.getElementById("particles");
+      for (let i = 0; i < 40; i++) {
+        const particle = document.createElement("div");
+        particle.className = "particle";
+        const size = Math.random() * 6 + 3;
+        particle.style.width = size + "px";
+        particle.style.height = size + "px";
+        particle.style.left = Math.random() * window.innerWidth + "px";
+        particle.style.top = window.innerHeight + "px";
+        particle.style.animationDuration = (10 + Math.random() * 20) + "s";
+        particlesContainer.appendChild(particle);
+      }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/script.js"></script>
+</body>
+
+</html>
