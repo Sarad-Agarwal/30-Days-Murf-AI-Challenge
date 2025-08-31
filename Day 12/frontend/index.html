@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Voice Agent</title>
+  <link rel="stylesheet" href="/frontend/style.css">
+</head>
+<body>
+  <main class="stage">
+    <div class="card">
+      <header class="card-header">
+        <div class="title">
+          <h1>Echo Bot <span class="pill">v3</span></h1>
+          <p class="subtitle">Tap to speak • Auto voice reply</p>
+        </div>
+        <div class="logo" aria-hidden>
+          <svg width="56" height="56" viewBox="0 0 64 64" fill="none">
+            <rect width="64" height="64" rx="12" fill="#0f172a"/>
+            <path d="M12 40c6-12 10-12 16 0s10 12 16 0" stroke="#8b5cf6" stroke-width="3" stroke-linecap="round"/>
+            <path d="M8 28c8-10 12-10 20 0s12 10 20 0" stroke="#06b6d4" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </header>
+
+      <section class="controls">
+        <div class="recorder">
+          <!-- Single smart record button -->
+          <button id="recordBtn" class="btn btn-primary mic-btn" aria-pressed="false">
+            <span class="mic-ripple" aria-hidden></span>
+            <span class="mic-icon" aria-hidden>
+              <!-- mic icon -->
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <rect x="9" y="2" width="6" height="12" rx="3" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 18v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M5 12a7 7 0 0 0 14 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span id="recText">Start Recording</span>
+          </button>
+        </div>
+
+        <div class="status" id="status">
+          <div class="status-dot" id="statusDot"></div>
+          <div class="status-text" id="statusText">Idle</div>
+        </div>
+      </section>
+
+      <section class="visual">
+        <canvas id="wave" width="800" height="120" aria-hidden></canvas>
+      </section>
+
+      <section class="transcript-box">
+        <div class="transcript-title">Conversation</div>
+        <textarea id="transcript" placeholder="Transcription and reply will appear here..." readonly></textarea>
+      </section>
+
+      <!-- Hidden audio player; autoplay handled in JS -->
+      <section class="playback">
+        <audio id="player"></audio>
+        <div class="meta">
+          <div id="audioUrl" class="audio-url"></div>
+          <button 
+    id="shareBtn" 
+    class="btn btn-ghost" 
+    title="Copy audio URL"
+    style="
+        background: linear-gradient(135deg, #ff6ec4, #7873f5);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 50px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+    "
+    onmouseover="this.style.background='linear-gradient(135deg, #7873f5, #ff6ec4)'; this.style.transform='scale(1.08)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)';"
+    onmouseout="this.style.background='linear-gradient(135deg, #ff6ec4, #7873f5)'; this.style.transform='scale(1)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.2)';"
+>
+    Copy URL
+</button>
+
+        </div>
+      </section>
+
+      <footer class="card-footer">
+        <small>Made by ~ Sarad Agarwal</small>
+      </footer>
+    </div>
+  </main>
+
+  <script src="/frontend/app.js"></script>
+</body>
+</html>
