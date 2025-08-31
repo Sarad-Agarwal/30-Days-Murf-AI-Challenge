@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Voice Agent</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/style.css">
+
+    <style>
+        /* Body background & font */
+        body.bg-light {
+            background: radial-gradient(circle at top, #0d6efd, #1a1a2e, #000);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            animation: float 15s infinite;
+        }
+        @keyframes float {
+            from { transform: translateY(0) translateX(0); opacity: 1; }
+            to { transform: translateY(-200vh) translateX(50vw); opacity: 0; }
+        }
+
+        /* Chat container glass effect */
+        .chat-container {
+            background: rgba(255, 255, 255, 0.05) !important;
+            /* background-color: red !important; */
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 2px solid rgba(0,255,255,0.2);
+            box-shadow: 0 0 30px rgba(119, 0, 255, 0.3);
+            animation: fadeIn 1s ease forwards;
+            z-index: 2;
+        }
+        @keyframes fadeIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        h4 {
+            font-weight: 700;
+            text-shadow: 0 0 20px #0dcaf0;
+        }
+
+        /* Mic button glowing */
+        .record-btn {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff4b2b, #ff416c);
+            border: none;
+            color: white;
+            font-size: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 25px rgba(255, 65, 108, 0.8);
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 5;
+        }
+        .record-btn:hover {
+            transform: scale(1.15);
+            box-shadow: 0 0 50px rgba(255, 65, 108, 1);
+        }
+        .record-btn.recording {
+            background: linear-gradient(135deg, #dc3545, #ff073a);
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 7, 58, 0.7); }
+            70% { box-shadow: 0 0 0 30px rgba(255, 7, 58, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 7, 58, 0); }
+        }
+
+        .status-display {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            font-weight: 500;
+            text-shadow: 0 0 20px #0dcaf0, 0 0 40px #20c997;
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+    <!-- Floating background particles -->
+    <div id="particles"></div>
+
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="chat-container">
+            <div class="chat-header text-center mb-4">
+                <h4>🤖 AI Voice Agent (MARVIS grown JARVIS)</h4>
+                <p class="text-muted">Your Conversational AI Assistant</p>
+            </div>
+            <div id="chat-log" class="chat-log"></div>
+            <div class="chat-input-container text-center mt-4">
+                <button id="recordBtn" class="record-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-mic-fill" viewBox="0 0 16 16">
+                        <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0V3z"/>
+                        <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"/>
+                    </svg>
+                </button>
+                <div id="statusDisplay" class="status-display">Ready to chat!</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Floating particles script
+        const particlesContainer = document.getElementById("particles");
+        for (let i = 0; i < 40; i++) {
+            const particle = document.createElement("div");
+            particle.className = "particle";
+            const size = Math.random() * 6 + 3;
+            particle.style.width = size + "px";
+            particle.style.height = size + "px";
+            particle.style.left = Math.random() * window.innerWidth + "px";
+            particle.style.top = window.innerHeight + "px";
+            particle.style.animationDuration = (10 + Math.random() * 20) + "s";
+            particlesContainer.appendChild(particle);
+        }
+    </script>
+
+    <script src="/static/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
