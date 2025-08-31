@@ -1,0 +1,149 @@
+:root{
+  --bg1: #0f1226;
+  --bg2: #15193a;
+  --fg: #e9ecff;
+  --muted: #9aa3c7;
+  --primary: #7c5cff;
+  --danger: #ff5d8f;
+  --accent: #22d3ee;
+  --glow: rgba(124,92,255,0.35);
+}
+
+* { box-sizing: border-box; }
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  color: var(--fg);
+  background: radial-gradient(1200px 800px at 20% 10%, #1a2046 0%, #0b0f22 55%, #080a15 100%);
+  overflow-x: hidden;
+}
+
+/* animated blobs */
+.bg .orb{
+  position: fixed;
+  width: 60vmin; height: 60vmin;
+  filter: blur(50px);
+  opacity: 0.3;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+.orb-1{ background: #7c5cff; top: -10vmin; left: -10vmin; animation: float1 12s ease-in-out infinite; }
+.orb-2{ background: #22d3ee; bottom: -20vmin; right: -10vmin; animation: float2 14s ease-in-out infinite; }
+.orb-3{ background: #ff5d8f; top: 20vmin; right: -20vmin; animation: float3 16s ease-in-out infinite; }
+
+@keyframes float1 { 0%,100%{transform: translate(0,0)} 50%{transform: translate(20px, 10px)} }
+@keyframes float2 { 0%,100%{transform: translate(0,0)} 50%{transform: translate(-30px, 20px)} }
+@keyframes float3 { 0%,100%{transform: translate(0,0)} 50%{transform: translate(10px, -25px)} }
+
+.card{
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 64px auto;
+  padding: 28px 28px 20px;
+  background:
+    radial-gradient(120% 120% at 10% 0%, rgba(124,92,255,0.25), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 28px;
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.5),
+    0 0 80px var(--glow) inset;
+  backdrop-filter: saturate(140%) blur(10px);
+}
+
+.header{
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; margin-bottom: 18px;
+}
+h1{
+  margin: 0;
+  font-size: 24px; font-weight: 800; letter-spacing: 0.3px;
+}
+.status{
+  display: flex; align-items: center; gap: 8px;
+  font-weight: 600; color: var(--muted);
+}
+.dot{
+  width: 10px; height: 10px; border-radius: 50%;
+  background: #c43d3d; box-shadow: 0 0 0 0 rgba(196,61,61,0.6);
+  transition: background .25s ease;
+}
+.dot.connected{ background: #3ddc97; box-shadow: 0 0 0 6px rgba(61,220,151,0.15); }
+
+.controls{
+  display: flex; gap: 12px; flex-wrap: wrap;
+  margin: 12px 0 14px;
+}
+.btn{
+  position: relative;
+  border: 0; outline: 0;
+  border-radius: 16px;
+  padding: 14px 18px;
+  font-weight: 700;
+  letter-spacing: .2px;
+  cursor: pointer;
+  color: white;
+  transition: transform .12s ease, box-shadow .2s ease;
+  box-shadow: 0 10px 24px rgba(0,0,0,.22);
+}
+.btn:active{ transform: translateY(1px); }
+.btn[disabled]{ opacity: .6; cursor: not-allowed; }
+
+.btn.primary{
+  background: linear-gradient(135deg, var(--primary), #5b9dff);
+  box-shadow: 0 12px 28px rgba(124,92,255,.35);
+}
+.btn.primary:hover{ box-shadow: 0 16px 40px rgba(124,92,255,.45); }
+
+.btn.danger{
+  background: linear-gradient(135deg, var(--danger), #ff8db3);
+  box-shadow: 0 12px 28px rgba(255,93,143,.35);
+}
+.btn.danger:hover{ box-shadow: 0 16px 40px rgba(255,93,143,.45); }
+
+/* pulsing accent when recording */
+.pulse{
+  position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+  width: 10px; height: 10px; border-radius: 50%;
+  background: #fff; opacity: .6;
+  box-shadow: 0 0 0 0 rgba(255,255,255,0.4);
+  animation: pulse 1.5s infinite;
+  pointer-events: none;
+}
+.recording .pulse{ background: #00ffd5; }
+@keyframes pulse{
+  0%{ box-shadow: 0 0 0 0 rgba(255,255,255,0.55) }
+  70%{ box-shadow: 0 0 0 12px rgba(255,255,255,0) }
+  100%{ box-shadow: 0 0 0 0 rgba(255,255,255,0) }
+}
+
+.meter-wrap{
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  padding: 14px;
+  margin: 8px 0 18px;
+}
+#meter{
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+  background: linear-gradient(90deg, rgba(124,92,255,.12), rgba(34,211,238,.15));
+}
+#hint{
+  margin-top: 8px; font-size: 12px; color: var(--muted);
+}
+
+.log h2{ margin: 6px 0 8px; font-size: 14px; color: var(--muted); }
+pre#log{
+  margin: 0;
+  max-height: 200px; overflow: auto;
+  background: #0b0f22;
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 12px; line-height: 1.4;
+}
