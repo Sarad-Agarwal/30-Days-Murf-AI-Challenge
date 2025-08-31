@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 17 – Live Audio Transcription</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <main class="card">
+    <header class="header">
+      <h1>🎙️ Day 17 – Streaming Transcription</h1>
+      <div class="status">
+        <span id="wsDot" class="dot"></span>
+        <span id="wsText">Disconnected</span>
+      </div>
+    </header>
+
+    <section class="controls">
+      <button id="startBtn" class="btn primary">
+        <span class="pulse" aria-hidden="true"></span>
+        Start Recording
+      </button>
+      <button id="stopBtn" class="btn danger" disabled>
+        Stop
+      </button>
+    </section>
+
+    <section class="transcription">
+      <h2>Transcription : Hello, I am at day 17 challenge</h2>
+      <pre id="transcript"></pre>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
