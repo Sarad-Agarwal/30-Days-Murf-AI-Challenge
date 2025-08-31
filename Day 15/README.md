@@ -1,4 +1,3 @@
-```markdown
 # 🎙️ AI Voice Agent — 30 Days of AI Voice Agents Challenge
 
 An interactive AI-powered voice assistant that listens to user speech, transcribes it, generates an intelligent response using Google Gemini, and speaks back the answer using Murf AI.  
@@ -134,5 +133,6 @@ python -m http.server 5500
 ## 📜 License
 
 MIT License © 2025 Sarad Agarwal
+
 
 ```
