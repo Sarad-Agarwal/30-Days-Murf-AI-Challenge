@@ -4,7 +4,7 @@
 ---
 
 ## 📅 Day 29: Documentation & Final Touches  
-We’re almost at the finish line of the **30 Days of AI Voice Agents Challenge**!  
+I'm almost at the finish line of the **30 Days of AI Voice Agents Challenge**!  
 Today’s focus was on **polishing documentation** ✨ — ensuring the project is easy to understand, use, and extend.  
 
 ---
@@ -104,4 +104,5 @@ Because this isn’t just an AI agent – it’s a **voice-powered digital compa
 ---
 
 ✨ Built with ❤️ using **Murf AI, AssemblyAI, Google Gemini, SerpAPI, FastAPI, and Render**  
+
 
